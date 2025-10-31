@@ -71,7 +71,9 @@ const mockFirestore = {
     })
   }),
   doc: () => ({
-    set: async () => {},
+    set: async () => {
+      console.log("Mock Firestore: setDoc called");
+    },
     get: async () => ({ exists: () => true, data: () => ({})})
   })
 } as unknown as Firestore;
