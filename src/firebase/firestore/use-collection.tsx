@@ -6,6 +6,7 @@ import {
   where,
   type DocumentData,
   type Query,
+  collection,
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
@@ -38,6 +39,3 @@ export function useCollection<T>(collectionName: string) {
 
   return { data, error };
 }
-
-// Re-export collection from firestore
-import { collection } from 'firebase/firestore';

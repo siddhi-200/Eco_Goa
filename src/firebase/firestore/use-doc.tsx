@@ -1,7 +1,7 @@
 'use client';
 
 import type { DocumentReference, DocumentData } from 'firebase/firestore';
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot, doc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useFirestore } from '@/firebase/provider';
 
@@ -35,6 +35,3 @@ export function useDoc<T>(path: string, docId: string) {
 
   return { data, loading, error };
 }
-
-// Re-export doc from firestore
-import { doc } from 'firebase/firestore';
