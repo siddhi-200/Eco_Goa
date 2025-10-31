@@ -13,9 +13,13 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, Home, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
+import { BookOpen, CalendarPlus, Home, LogOut, Map, Megaphone, Recycle, ScanSearch, User } from 'lucide-react';
+import { useAuth, useUser } from '@/firebase';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Button } from './ui/button';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: <Home /> },
@@ -27,8 +31,96 @@ const navItems = [
   { href: '/report-dumping', label: 'Report Dumping', icon: <Megaphone /> },
 ];
 
+function UserProfile() {
+  const { user } = useUser();
+  const { signOut } = useAuth();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.push('/login');
+  };
+
+  if (!user) {
+    return (
+      <SidebarMenuButton asChild>
+        <Link href="/login">
+          <User />
+          <span>Sign In</span>
+        </Link>
+      </SidebarMenuButton>
+    );
+  }
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('');
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="h-auto w-full justify-start p-2 text-left">
+          <Avatar className="h-8 w-8">
+            <AvatarImage src={user.photoURL ?? ''} alt={user.displayName ?? 'User'} />
+            <AvatarFallback>{getInitials(user.displayName ?? 'U')}</AvatarFallback>
+          </Avatar>
+          <div className="ml-2 group-data-[collapsible=icon]:hidden">
+            <p className="truncate text-sm font-medium">{user.displayName}</p>
+            <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+          </div>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent side="right" align="start" className="w-56">
+        <DropdownMenuLabel>{user.displayName}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem disabled>
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled>
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleSignOut}>
+          <LogOut className="mr-2 h-4 w-4" />
+          <span>Log out</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { user, loading } = useUser();
+  const router = useRouter();
+
+  const isAuthPage = ['/login', '/signup', '/forgot-password'].includes(pathname);
+
+  // If loading, show a simplified shell or a loading state.
+  if (loading) {
+     return <div className="flex h-screen w-screen items-center justify-center">Loading...</div>;
+  }
+  
+  // If the user is not authenticated and not on an auth page, redirect to login.
+  if (!user && !isAuthPage && typeof window !== 'undefined') {
+    router.push('/login');
+    return <div className="flex h-screen w-screen items-center justify-center">Redirecting...</div>;
+  }
+  
+  // If the user is authenticated and on an auth page, redirect to the home page.
+  if (user && isAuthPage && typeof window !== 'undefined') {
+    router.push('/');
+    return <div className="flex h-screen w-screen items-center justify-center">Redirecting...</div>;
+  }
+
+  // Render auth pages without the main app shell.
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
 
   return (
     <SidebarProvider>
@@ -55,7 +147,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-           {/* User profile can be added back here later */}
+           <UserProfile />
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
