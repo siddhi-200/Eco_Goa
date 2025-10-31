@@ -15,7 +15,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, HelpCircle, Home, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
+import { BookOpen, CalendarPlus, Home, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: <Home /> },
@@ -25,7 +25,6 @@ const navItems = [
   { href: '/identify-waste', label: 'Identify Waste', icon: <ScanSearch /> },
   { href: '/resources', label: 'Resources', icon: <BookOpen /> },
   { href: '/report-dumping', label: 'Report Dumping', icon: <Megaphone /> },
-  { href: '/faq', label: 'FAQ', icon: <HelpCircle /> },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
