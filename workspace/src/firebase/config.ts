@@ -11,8 +11,7 @@ const firebaseConfig: FirebaseOptions = {
 
 export function getFirebaseConfig() {
   if (!firebaseConfig.apiKey) {
-    console.warn('Firebase config not found, using empty values.');
-    return {};
+    throw new Error('Missing a Firebase API key.');
   }
   return firebaseConfig;
 }
