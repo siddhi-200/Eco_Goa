@@ -7,6 +7,62 @@ import {
   type ComponentProps,
 } from 'react';
 import { FirebaseProvider, initializeFirebase } from '@/firebase';
+import type { FirebaseApp } from 'firebase/app';
+import type { Auth, User } from 'firebase/auth';
+import type { Firestore } from 'firebase/firestore';
+
+// --- Mock Firebase Implementation ---
+const mockUser: User = {
+  uid: 'mock-user-id',
+  email: 'test@example.com',
+  displayName: 'Test User',
+  photoURL: 'https://picsum.photos/seed/1/100/100',
+  providerId: 'password',
+  emailVerified: true,
+  isAnonymous: false,
+  metadata: {
+    creationTime: new Date().toUTCString(),
+    lastSignInTime: new Date().toUTCString(),
+  },
+  providerData: [],
+  tenantId: null,
+  delete: async () => {},
+  getIdToken: async () => 'mock-token',
+  getIdTokenResult: async () => ({
+    token: 'mock-token',
+    expirationTime: new Date(Date.now() + 3600 * 1000).toISOString(),
+    authTime: new Date().toISOString(),
+    issuedAtTime: new Date().toISOString(),
+    signInProvider: 'password',
+    signInSecondFactor: null,
+    claims: {},
+  }),
+  reload: async () => {},
+  toJSON: () => ({}),
+};
+
+const mockAuth = {
+  currentUser: mockUser,
+  onAuthStateChanged: (callback: (user: User | null) => void) => {
+    // Immediately call back with the mock user
+    setTimeout(() => callback(mockUser), 100);
+    // Return a dummy unsubscribe function
+    return () => {};
+  },
+  // Add other methods as needed, with mock implementations
+  signInWithEmailAndPassword: async () => ({ user: mockUser }),
+  createUserWithEmailAndPassword: async () => ({ user: mockUser }),
+  signOut: async () => {
+    // In a real app this would clear the user
+    // For mock, we can just log it
+    console.log('Mock sign out');
+  },
+} as unknown as Auth;
+
+const mockFirestore = {} as Firestore;
+const mockApp = {} as FirebaseApp;
+// --- End Mock Firebase Implementation ---
+
 
 type FirebaseProviderProps = Omit<
   ComponentProps<typeof FirebaseProvider>,
@@ -14,30 +70,33 @@ type FirebaseProviderProps = Omit<
 >;
 
 function isFirebaseConfigured() {
-  return !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+  // A simple check to see if the main API key is present and not a placeholder
+  return (
+    process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+    process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== 'your-api-key'
+  );
 }
 
 
 export function FirebaseClientProvider({ children }: { children: ReactNode }) {
   const [firebase, setFirebase] = useState<FirebaseProviderProps | null>(null);
 
-  const configured = isFirebaseConfigured();
-
   useEffect(() => {
-    if (configured) {
+    if (isFirebaseConfigured()) {
       const { app, auth, firestore } = initializeFirebase();
       setFirebase({ app, auth, firestore });
+    } else {
+      // Use mock Firebase if not configured
+      setFirebase({
+        app: mockApp,
+        auth: mockAuth,
+        firestore: mockFirestore,
+      });
     }
-  }, [configured]);
-
-  if (!configured) {
-    // If Firebase is not configured, just render the children.
-    // Auth-gated pages will redirect to /login, which doesn't need Firebase.
-    return <>{children}</>;
-  }
+  }, []);
 
   if (!firebase) {
-    // Show a loading indicator or a placeholder while Firebase is initializing
+    // This will be very brief, but prevents children from rendering without a provider
     return null;
   }
 
