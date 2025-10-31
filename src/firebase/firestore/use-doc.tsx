@@ -1,7 +1,0 @@
-{
-  "entities": {},
-  "auth": {
-    "providers": []
-  },
-  "firestore": {}
-}
