@@ -2,10 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { AppShell } from '@/components/app-shell';
-import { FirebaseClientProvider } from '@/firebase';
 import { Inter as FontSans } from "next/font/google";
 import { cn } from '@/lib/utils';
-import FirebaseErrorListener from '@/components/FirebaseErrorListener';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,13 +26,10 @@ export default function RootLayout({
         "min-h-screen bg-background font-sans antialiased",
         fontSans.variable
       )}>
-        <FirebaseClientProvider>
-          <AppShell>
-            {children}
-          </AppShell>
-        </FirebaseClientProvider>
+        <AppShell>
+          {children}
+        </AppShell>
         <Toaster />
-        <FirebaseErrorListener />
       </body>
     </html>
   );
