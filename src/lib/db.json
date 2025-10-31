@@ -1,0 +1,71 @@
+{
+  "pickups": [
+    {
+      "id": "pickup-1",
+      "userId": "user-123",
+      "address": "123 Beach Road, Candolim, Goa",
+      "pickupDate": "2024-08-15T00:00:00.000Z",
+      "timeSlot": "morning",
+      "status": "scheduled"
+    }
+  ],
+  "dumping_reports": [
+    {
+      "id": "report-1",
+      "userId": "user-456",
+      "location": "Near Anjuna Flea Market",
+      "description": "Large pile of construction debris and plastic bags.",
+      "photoUrl": "https://picsum.photos/seed/dumping1/800/600",
+      "status": "reported",
+      "timestamp": "2024-08-10T10:30:00.000Z"
+    }
+  ],
+  "recycling_submissions": [
+    {
+      "id": "sub-1",
+      "userId": "user-123",
+      "description": "A bag of clean plastic bottles and 5 cardboard boxes.",
+      "photoUrl": "https://picsum.photos/seed/recycling1/800/600",
+      "status": "approved",
+      "points": 50,
+      "timestamp": "2024-08-09T14:00:00.000Z"
+    }
+  ],
+  "user_points": {
+    "user-123": 1250,
+    "user-456": 300
+  },
+  "tracking_vehicles": [
+    { "id": 1, "top": "20%", "left": "30%", "delay": "0s" },
+    { "id": 2, "top": "50%", "left": "60%", "delay": "1s" },
+    { "id": 3, "top": "75%", "left": "40%", "delay": "0.5s" },
+    { id: 4, "top": "35%", "left": "75%", "delay": "1.5s" }
+  ],
+  "resources": [
+    {
+      "id": "reduce-reuse-recycle",
+      "title": "The 3 R's: Reduce, Reuse, Recycle",
+      "content": "The 3 R's are a cornerstone of sustainable living. 'Reduce' means creating less waste in the first place. 'Reuse' involves using items multiple times before replacing them. 'Recycle' is the process of converting waste materials into new materials and objects. By following these principles, we can significantly decrease our environmental impact."
+    },
+    {
+      "id": "composting",
+      "title": "Home Composting 101",
+      "content": "Composting is a natural process that turns organic waste—like food scraps and yard trimmings—into a valuable fertilizer for your garden. To start, you need a compost bin and a mix of 'greens' (like fruit peels and coffee grounds) and 'browns' (like dried leaves and cardboard). Keep the pile moist and turn it regularly to speed up decomposition."
+    },
+    {
+      "id": "waste-segregation",
+      "title": "Why Waste Segregation is Crucial",
+      "content": "Segregating waste at its source into categories like wet, dry, and hazardous is the first and most important step in effective waste management. It makes recycling more efficient, reduces the amount of waste going to landfills, and prevents the contamination of recyclable materials. Proper segregation is a simple habit with a massive positive impact."
+    },
+    {
+      "id": "e-waste",
+      "title": "Dealing with E-Waste",
+      "content": "Electronic waste, or e-waste, includes discarded electronic devices like phones, computers, and batteries. These items contain hazardous materials and should not be thrown in regular trash. Look for designated e-waste collection centers or special pickup services in your area to ensure they are disposed of safely and responsibly."
+    },
+    {
+      "id": "plastic-alternatives",
+      "title": "Plastic-Free Living Tips",
+      "content": "Reducing plastic use can be challenging, but every small change helps. Carry a reusable water bottle and coffee cup. Bring your own cloth bags when shopping. Opt for products with minimal or no plastic packaging. Choose glass, metal, or wood alternatives whenever possible. These small actions collectively contribute to a healthier planet."
+    }
+  ]
+}
