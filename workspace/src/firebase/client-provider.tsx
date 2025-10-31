@@ -31,19 +31,14 @@ export function FirebaseClientProvider({ children }: { children: ReactNode }) {
   }, [configured]);
 
   if (!configured) {
-    // If Firebase is not configured, we can show a message or nothing.
-    // The AppShell logic will handle redirects for protected pages.
-    // For now, just render children to allow public pages to work.
+    // If Firebase is not configured, just render the children.
+    // Auth-gated pages will redirect to /login, which doesn't need Firebase.
     return <>{children}</>;
   }
 
   if (!firebase) {
-    // Show a loading indicator while Firebase is initializing
-    return (
-       <div className="flex items-center justify-center h-screen">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
-      </div>
-    );
+    // Show a loading indicator or a placeholder while Firebase is initializing
+    return null;
   }
 
   return <FirebaseProvider {...firebase}>{children}</FirebaseProvider>;
