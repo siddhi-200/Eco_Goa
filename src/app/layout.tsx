@@ -5,7 +5,6 @@ import { AppShell } from '@/components/app-shell';
 import { FirebaseClientProvider } from '@/firebase';
 import { Inter as FontSans } from "next/font/google";
 import { cn } from '@/lib/utils';
-import FirebaseErrorListener from '@/components/FirebaseErrorListener';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -32,7 +31,6 @@ export default function RootLayout({
           <AppShell>
             {children}
           </AppShell>
-          <FirebaseErrorListener />
         </FirebaseClientProvider>
         <Toaster />
       </body>
