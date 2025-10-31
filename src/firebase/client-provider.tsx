@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { FirebaseProvider, initializeFirebase } from '@/firebase';
 import type { FirebaseApp } from 'firebase/app';
-import type { Auth, User } from 'firebase/auth';
+import type { Auth, User, UserCredential } from 'firebase/auth';
 import type { Firestore } from 'firebase/firestore';
 
 // --- Mock Firebase Implementation ---
@@ -49,17 +49,33 @@ const mockAuth = {
     // Return a dummy unsubscribe function
     return () => {};
   },
-  // Add other methods as needed, with mock implementations
-  signInWithEmailAndPassword: async () => ({ user: mockUser }),
-  createUserWithEmailAndPassword: async () => ({ user: mockUser }),
+  signInWithEmailAndPassword: async (): Promise<UserCredential> => ({ user: mockUser, providerId: null, operationType: 'signIn' }),
+  createUserWithEmailAndPassword: async (): Promise<UserCredential> => ({ user: mockUser, providerId: null, operationType: 'signIn' }),
   signOut: async () => {
     // In a real app this would clear the user
     // For mock, we can just log it
     console.log('Mock sign out');
+    // To simulate logout, we can tell listeners the user is null
+    // This part is tricky as we'd need to manage the callback.
+    // For now, a page refresh will bring the mock user back.
   },
+  updateProfile: async () => {},
 } as unknown as Auth;
 
-const mockFirestore = {} as Firestore;
+const mockFirestore = {
+  // Add mock firestore methods if needed for reads/writes in demo mode
+  collection: () => ({
+    doc: () => ({
+      set: async () => {},
+      get: async () => ({ exists: () => true, data: () => ({})})
+    })
+  }),
+  doc: () => ({
+    set: async () => {},
+    get: async () => ({ exists: () => true, data: () => ({})})
+  })
+} as unknown as Firestore;
+
 const mockApp = {} as FirebaseApp;
 // --- End Mock Firebase Implementation ---
 
@@ -87,6 +103,7 @@ export function FirebaseClientProvider({ children }: { children: ReactNode }) {
       setFirebase({ app, auth, firestore });
     } else {
       // Use mock Firebase if not configured
+      console.log("Using mock Firebase services for demo.");
       setFirebase({
         app: mockApp,
         auth: mockAuth,
