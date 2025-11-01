@@ -1,7 +1,7 @@
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { BookOpen, CalendarPlus, Info, Map, Megaphone, Recycle, ScanSearch } from "lucide-react";
+import { BookOpen, CalendarPlus, Info, Map, Megaphone, Recycle, ScanSearch, Scale } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -92,6 +92,27 @@ export default function AboutPage() {
           </CardContent>
         </Card>
         
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+                <Scale className="w-6 h-6 text-primary"/>
+                <span>Laws & Consequences</span>
+            </CardTitle>
+            <CardDescription>
+                Understanding the rules that protect Goa's environment.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="text-muted-foreground space-y-4">
+            <p>The Government of Goa has implemented strict regulations to combat illegal dumping and improper waste disposal. Under the Goa Non-Biodegradable Garbage (Control) Act, littering and failure to segregate waste are punishable offenses.</p>
+            <ul className="list-disc list-inside space-y-2">
+                <li><span className="font-semibold">Fines for Littering:</span> Individuals caught littering can face fines starting from ₹2,000, which can increase for repeated offenses.</li>
+                <li><span className="font-semibold">Commercial Violations:</span> Businesses that do not manage their waste according to regulations can face much steeper fines and, in some cases, the revocation of their licenses.</li>
+                <li><span className="font-semibold">No Segregation, No Collection:</span> Many municipalities have adopted a "no segregation, no collection" policy, meaning waste collectors will not pick up mixed waste.</li>
+            </ul>
+            <p>These laws are in place to ensure that everyone contributes to keeping Goa beautiful. This app is designed to help you follow these rules easily and effectively.</p>
+          </CardContent>
+        </Card>
+
         <div>
             <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold font-headline tracking-tight">App Features</h2>
