@@ -2,27 +2,27 @@
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Star, Gift, Lightbulb, Ticket } from "lucide-react";
+import { Star, Gift, Lightbulb, Ticket, Smartphone, UtensilsCrossed } from "lucide-react";
 import RecyclingForm from "./recycling-form";
 
 const rewards = [
     {
-      name: "Coffee Discount",
-      points: 500,
-      partner: "Goa Coffee House",
-      icon: <Ticket className="w-6 h-6 text-amber-500" />,
+      name: "Free Movie Ticket",
+      points: 750,
+      partner: "INOX Cinemas",
+      icon: <Ticket className="w-6 h-6 text-rose-500" />,
     },
     {
-      name: "Free Beach Cleanup Kit",
-      points: 1000,
-      partner: "EcoGoa Store",
-      icon: <Gift className="w-6 h-6 text-primary" />,
+      name: "5GB Mobile Data Pack",
+      points: 1200,
+      partner: "Jio/Airtel/Vi",
+      icon: <Smartphone className="w-6 h-6 text-blue-500" />,
     },
     {
-      name: "₹100 Off Organic Produce",
+      name: "₹150 Food Delivery Voucher",
       points: 1500,
-      partner: "Goa Greens",
-      icon: <Ticket className="w-6 h-6 text-amber-500" />,
+      partner: "Swiggy/Zomato",
+      icon: <UtensilsCrossed className="w-6 h-6 text-orange-500" />,
     },
   ];
   
