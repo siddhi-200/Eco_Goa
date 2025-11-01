@@ -1,9 +1,12 @@
 
+
 import { PageHeader } from "@/components/page-header";
 import WasteIdentifier from "./waste-identifier";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Leaf, Recycle, Biohazard, Cpu, AlertTriangle, Dot } from "lucide-react";
+import { Leaf, Recycle, Biohazard, Cpu, AlertTriangle, Dot, ArrowLeft, Layers } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const segregationCategories = [
   {
@@ -91,6 +94,22 @@ export default function IdentifyWastePage() {
           ))}
         </div>
       </section>
+
+      <div className="text-center mt-16 flex justify-center gap-4">
+          <Button asChild size="lg" variant="outline">
+              <Link href="/">
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                  Back to Home
+              </Link>
+          </Button>
+          <Button asChild size="lg">
+              <Link href="/">
+                  Explore More Features
+                  <Layers className="ml-2 h-5 w-5" />
+              </Link>
+          </Button>
+      </div>
+
     </div>
   );
 }
