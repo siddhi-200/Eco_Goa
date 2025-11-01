@@ -71,7 +71,7 @@ export default function Home() {
             </p>
             <Button asChild size="lg" className="mt-8 bg-accent hover:bg-accent/90 text-accent-foreground">
               <Link href="/schedule-pickup">
-                Schedule a Pickup <ArrowRight className="ml-2" />
+                Get Started <ArrowRight className="ml-2" />
               </Link>
             </Button>
           </div>
