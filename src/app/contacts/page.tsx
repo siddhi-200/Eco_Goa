@@ -1,6 +1,8 @@
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Leaf, Phone, Server, Smartphone, Truck } from "lucide-react";
+import { Leaf, Phone, Server, Smartphone, Truck, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const howItWorksSteps = [
     {
@@ -98,6 +100,15 @@ export default function ContactsPage() {
                         ))}
                     </div>
                 </section>
+
+                <div className="text-center mt-12">
+                    <Button asChild size="lg">
+                        <Link href="/">
+                            <ArrowLeft className="mr-2 h-5 w-5" />
+                            Back to Home
+                        </Link>
+                    </Button>
+                </div>
             </div>
         </div>
     )
