@@ -16,7 +16,8 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, Home, Info, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
+import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
+import { Button } from './ui/button';
 
 const navItems = [
   { href: '/', label: 'Home', icon: <Home /> },
@@ -61,9 +62,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-14 items-center gap-4 border-b bg-card px-4 md:px-6">
-          <SidebarTrigger className="md:hidden" />
-          <Logo />
+        <header className="flex h-14 items-center justify-between border-b bg-card px-4 md:px-6">
+            <div className="flex items-center gap-4">
+              <SidebarTrigger className="md:hidden" />
+              <Logo />
+            </div>
+            <Button variant="ghost" size="icon" aria-label="Sign out">
+              <LogOut className="h-5 w-5" />
+            </Button>
         </header>
         <div className="flex-1 overflow-auto bg-background">
           {children}
