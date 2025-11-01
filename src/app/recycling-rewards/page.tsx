@@ -17,8 +17,9 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const rewards = [
     {
@@ -57,11 +58,27 @@ const rewards = [
     "Recycling one aluminum can saves enough energy to run a TV for three hours.",
     "The energy saved from recycling one glass bottle can light a 100-watt bulb for four hours.",
     "Recycling paper uses 60% less energy than manufacturing it from raw materials.",
+    "Plastic waste can take up to 1,000 years to decompose in landfills.",
+    "Goa produces over 400 tons of waste every single day."
   ];
 
 export default function RecyclingRewardsPage() {
     const { toast } = useToast();
     const userPoints = 1250;
+    const [currentFactIndex, setCurrentFactIndex] = useState(0);
+    const [isFactVisible, setIsFactVisible] = useState(true);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsFactVisible(false);
+            setTimeout(() => {
+                setCurrentFactIndex((prevIndex) => (prevIndex + 1) % facts.length);
+                setIsFactVisible(true);
+            }, 500); // Wait for fade out to complete
+        }, 5000); // Change fact every 5 seconds
+
+        return () => clearInterval(interval);
+    }, []);
 
     const handleRedeem = (rewardName: string, points: number) => {
         toast({
@@ -134,8 +151,8 @@ export default function RecyclingRewardsPage() {
                             </div>
 
                              <AlertDialog>
-                                <AlertDialogTrigger asChild disabled={userPoints < reward.points}>
-                                    <Button variant="secondary" size="sm">
+                                <AlertDialogTrigger asChild>
+                                    <Button variant="secondary" size="sm" disabled={userPoints < reward.points}>
                                         {reward.points} pts
                                     </Button>
                                 </AlertDialogTrigger>
@@ -167,10 +184,13 @@ export default function RecyclingRewardsPage() {
                     Recycling Facts
                 </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-                {facts.map((fact, index) => (
-                    <p key={index} className="text-sm text-muted-foreground italic">"{fact}"</p>
-                ))}
+            <CardContent className="h-20 flex items-center justify-center">
+                <p className={cn(
+                    "text-sm text-muted-foreground italic text-center transition-opacity duration-500",
+                    isFactVisible ? 'opacity-100' : 'opacity-0'
+                    )}>
+                    "{facts[currentFactIndex]}"
+                </p>
             </CardContent>
           </Card>
 
