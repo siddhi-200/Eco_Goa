@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle, Circle, Clock, Loader, MapPin, PackageCheck, Send, Truck } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
+import { Separator } from '@/components/ui/separator';
 
 const statuses = [
   { name: 'Request Sent', icon: <Send className="w-5 h-5" /> },
@@ -47,6 +48,13 @@ export default function TrackingTimeline() {
       <CardHeader>
         <CardTitle>Pickup Status</CardTitle>
         <CardDescription>Follow your waste collection request in real-time.</CardDescription>
+        <Separator className="my-4" />
+        <div className="space-y-2 text-sm">
+            <h3 className="font-semibold">Collection From:</h3>
+            <p className="text-muted-foreground">123 Beach Road, Candolim, Goa</p>
+            <h3 className="font-semibold mt-2">Upcoming Tasks:</h3>
+            <p className="text-muted-foreground">No other tasks scheduled for today.</p>
+        </div>
       </CardHeader>
       <CardContent>
         {currentStatusIndex === statuses.length -1 && collectedImage ? (
