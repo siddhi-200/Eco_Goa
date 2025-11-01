@@ -85,7 +85,7 @@ export default function RecyclingForm() {
   };
 
   const confidencePercentage = result ? Math.round(result.confidenceScore * 100) : 0;
-  const confidenceColor = confidencePercentage > 75 ? "bg-primary" : confidencePercentage > 40 ? "bg-yellow-500" : "bg-destructive";
+  const confidenceColor = confidencePercentage > 75 ? "bg-primary" : confidencePercentage > 40 ? "bg-green-500" : "bg-destructive";
 
   return (
     <Card>
@@ -161,7 +161,7 @@ export default function RecyclingForm() {
                   <Label>AI Confidence</Label>
                   <span className="text-sm font-medium">{confidencePercentage}%</span>
                 </div>
-                <Progress value={confidencePercentage} indicatorClassName={confidenceColor} />
+                <Progress value={confidencePercentage} className="h-2 [&>div]:bg-primary" />
               </div>
             </div>
           )}
