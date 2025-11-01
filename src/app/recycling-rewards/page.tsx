@@ -134,8 +134,8 @@ export default function RecyclingRewardsPage() {
                             </div>
 
                              <AlertDialog>
-                                <AlertDialogTrigger asChild>
-                                    <Button variant="secondary" size="sm" disabled={userPoints < reward.points}>
+                                <AlertDialogTrigger asChild disabled={userPoints < reward.points}>
+                                    <Button variant="secondary" size="sm">
                                         {reward.points} pts
                                     </Button>
                                 </AlertDialogTrigger>
