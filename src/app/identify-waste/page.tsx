@@ -2,45 +2,49 @@
 import { PageHeader } from "@/components/page-header";
 import WasteIdentifier from "./waste-identifier";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Leaf, Recycle, Biohazard, Cpu, AlertTriangle } from "lucide-react";
+import { Leaf, Recycle, Biohazard, Cpu, AlertTriangle, Dot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const segregationCategories = [
   {
     title: "Wet Waste",
-    description: "Biodegradable waste like food scraps, peels, and garden waste.",
+    description: "Biodegradable kitchen waste.",
     icon: <Leaf className="w-8 h-8 text-green-600" />,
     color: "border-green-600",
     badge: "Non-Hazardous",
     badgeVariant: "default" as "default",
     bgColor: "bg-green-50 dark:bg-green-950",
+    items: ["Food Scraps", "Vegetable Peels", "Garden Waste", "Tea Bags"],
   },
   {
     title: "Dry Waste",
-    description: "Recyclable materials like plastic, paper, metal, and glass.",
+    description: "Recyclable materials.",
     icon: <Recycle className="w-8 h-8 text-blue-600" />,
     color: "border-blue-600",
     badge: "Non-Hazardous",
     badgeVariant: "default" as "default",
     bgColor: "bg-blue-50 dark:bg-blue-950",
+    items: ["Plastic Bottles", "Paper & Cardboard", "Metal Cans", "Glass Jars"],
   },
   {
     title: "Hazardous Waste",
-    description: "Paints, chemicals, bulbs, and other dangerous materials.",
+    description: "Items that are unsafe to dispose of with regular trash.",
     icon: <Biohazard className="w-8 h-8 text-red-600" />,
     color: "border-red-600",
     badge: "Hazardous",
     badgeVariant: "destructive" as "destructive",
     bgColor: "bg-red-50 dark:bg-red-950",
+    items: ["Paint Cans", "Pesticides", "Expired Medicines", "Syringes"],
   },
   {
     title: "E-Waste",
-    description: "Discarded electronic devices like phones, chargers, and batteries.",
+    description: "Discarded electronic devices.",
     icon: <Cpu className="w-8 h-8 text-gray-700 dark:text-gray-300" />,
     color: "border-gray-700",
     badge: "Hazardous",
     badgeVariant: "destructive" as "destructive",
     bgColor: "bg-gray-100 dark:bg-gray-800",
+    items: ["Old Phones", "Chargers & Cables", "Batteries", "Laptops"],
   }
 ];
 
@@ -58,21 +62,30 @@ export default function IdentifyWastePage() {
             <h2 className="text-3xl font-bold font-headline tracking-tight">Waste Segregation Guide</h2>
             <p className="mt-2 text-lg text-muted-foreground">Learn how to segregate your waste correctly.</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {segregationCategories.map(category => (
-            <Card key={category.title} className={`${category.bgColor} ${category.color} border-2`}>
+            <Card key={category.title} className={`${category.bgColor} ${category.color} border-2 flex flex-col`}>
               <CardHeader>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 mb-2">
                   {category.icon}
                   <CardTitle className="text-xl font-headline">{category.title}</CardTitle>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
-                <Badge variant={category.badgeVariant} className={category.badgeVariant === 'default' ? 'bg-green-200 text-green-900' : ''}>
+                 <Badge variant={category.badgeVariant} className={`w-fit ${category.badgeVariant === 'default' ? 'bg-green-200 text-green-900' : ''}`}>
                   {category.badgeVariant === 'destructive' && <AlertTriangle className="mr-1 h-3 w-3" />}
                   {category.badge}
                 </Badge>
+              </CardHeader>
+              <CardContent className="flex-1">
+                <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
+                <h4 className="font-semibold mb-2 text-sm">Examples:</h4>
+                <ul className="space-y-1">
+                  {category.items.map(item => (
+                    <li key={item} className="flex items-start text-sm text-muted-foreground">
+                        <Dot className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
           ))}
