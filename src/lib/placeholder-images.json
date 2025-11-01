@@ -9,7 +9,7 @@
     {
       "id": "goa-map",
       "description": "A stylized map of Goa.",
-      "imageUrl": "https://images.unsplash.com/photo-1736117705482-6d897896e077?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxnb2ElMjBtYXB8ZW58MHx8fHwxNzYxODgzMzU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1736117705482-6d897896e077?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxnb2ElMjBtYXB8ZW58MHx8fHwxNzYxODgzMzU4fDA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "goa map"
     },
     {
@@ -21,26 +21,32 @@
     {
       "id": "trash-dumping",
       "description": "A pile of illegally dumped trash bags.",
-      "imageUrl": "https://images.unsplash.com/photo-1704756082548-af7c773aa0ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0cmFzaCUyMGR1bXBpbmd8ZW58MHx8fHwxNzYxODgzMzU4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1704756082548-af7c773aa0ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0cmFzaCUyMGR1bXBpbmd8ZW58MHx8fHwxNzYxODgzMzU4fDA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "trash dumping"
     },
     {
       "id": "waste-item-plastic",
       "description": "A plastic bottle to be identified.",
-      "imageUrl": "https://images.unsplash.com/photo-1616118132534-381148898bb4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFzdGljJTIwYm90dGxlfGVufDB8fHx8MTc2MTg0NzU2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1616118132534-381148898bb4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFzdGljJTIwYm90dGxlfGVufDB8fHx8MTc2MTg0NzU2N3ww&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "plastic bottle"
     },
     {
       "id": "recycling-submission",
       "description": "A user submitting a photo of their recycling.",
-      "imageUrl": "https://images.unsplash.com/photo-1686946112728-5c4ad72aad55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZWN5Y2xpbmclMjBpdGVtc3xlbnwwfHx8fDE3NjE4MjM0NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1686946112728-5c4ad72aad55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZWN5Y2xpbmclMjBpdGVtc3xlbnwwfHx8fDE3NjE4MjM0NTZ8MA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "recycling items"
     },
     {
       "id": "about-us",
       "description": "A lush green landscape in Goa, representing its natural beauty.",
-      "imageUrl": "https://images.unsplash.com/photo-1609146143099-0a6b8c74f7b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnb2ElMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzYxOTYzMjQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1609146143099-0a6b8c74f7b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnb2ElMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzYxOTYzMjQzfDA&ixlib.rb-4.1.0&q=80&w=1080",
       "imageHint": "goa landscape"
+    },
+    {
+      "id": "package-collected",
+      "description": "A neatly tied garbage bag, ready for collection.",
+      "imageUrl": "https://images.unsplash.com/photo-1594244972153-23364c6778a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnYXJiYWdlJTIwYmFnfGVufDB8fHx8MTc2MjAwNTM2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "garbage bag"
     }
   ]
 }
