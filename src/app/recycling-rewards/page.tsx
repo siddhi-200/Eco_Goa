@@ -2,7 +2,7 @@
 'use client';
 
 import { PageHeader } from "@/components/page-header";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, Gift, Lightbulb, Ticket, Smartphone, UtensilsCrossed, IndianRupee, ShoppingBag, Plane, Trophy } from "lucide-react";
 import RecyclingForm from "./recycling-form";
