@@ -3,11 +3,21 @@ import { cn } from '@/lib/utils';
 const RealisticLogoIcon = ({ className }: { className?: string }) => (
   <svg
     className={className}
-    viewBox="0 0 100 100"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     xmlns="http://www.w3.org/2000/svg"
-    fill="currentColor"
   >
-    <path d="M50 10 C 55 10, 60 15, 60 20 L 60 30 L 85 30 C 90 30, 95 35, 95 40 C 95 45, 90 50, 85 50 L 50 50 L 50 60 C 50 68, 42 75, 35 75 L 20 75 C 12 75, 5 68, 5 60 L 5 40 C 5 35, 10 30, 15 30 L 40 30 L 40 20 C 40 15, 45 10, 50 10 Z M 80 60 C 80 55, 75 50, 70 50 L 65 50 C 60 50, 55 55, 55 60 L 55 70 L 30 70 C 25 70, 20 75, 20 80 C 20 85, 25 90, 30 90 L 60 90 L 60 80 C 60 72, 68 65, 75 65 L 90 65 C 98 65, 105 58, 105 50 L 85 50 C 85 55, 80 60, 80 60 Z" transform="rotate(15, 50, 50)"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" stroke="none" />
+    <g transform="translate(4 4) scale(0.6)">
+        <path d="M12 6v3l4-4-4-4v3" stroke="hsl(var(--background))" />
+        <path d="M6 12l-4 4 4 4v-3" stroke="hsl(var(--background))" />
+        <path d="M18.004 15l4 4-4 4v-3" stroke="hsl(var(--background))" />
+        <path d="M11 12a1 1 0 1 0 2 0 1 1 0 1 0-2 0" fill="hsl(var(--background))" stroke="none"/>
+    </g>
   </svg>
 );
 
