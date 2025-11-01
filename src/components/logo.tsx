@@ -12,11 +12,11 @@ const RealisticLogoIcon = ({ className }: { className?: string }) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="currentColor" stroke="none" />
-    <g transform="translate(4 4) scale(0.6)">
-        <path d="M12 6v3l4-4-4-4v3" stroke="hsl(var(--background))" />
-        <path d="M6 12l-4 4 4 4v-3" stroke="hsl(var(--background))" />
-        <path d="M18.004 15l4 4-4 4v-3" stroke="hsl(var(--background))" />
-        <path d="M11 12a1 1 0 1 0 2 0 1 1 0 1 0-2 0" fill="hsl(var(--background))" stroke="none"/>
+     <g transform="translate(3 3) scale(0.75)">
+      <path d="M16.4 2.8c.2-.3.2-.6 0-.9l-2-2.8c-.2-.3-.5-.4-.8-.2L8.2 2.8c-.3.1-.4.5-.2.8l2 2.8c.2.3.5.4.8.2L16.4 2.8z" stroke="hsl(var(--background))" fill="hsl(var(--background))"/>
+      <path d="m11.3 14.7 3.4-2.1" stroke="hsl(var(--background))" />
+      <path d="M5.1 12.2c-1.4 2.4 1 5.2 3.8 5.6 2.8.4 5.2-1.9 5.6-4.3" stroke="hsl(var(--background))" />
+      <path d="M16.9 13c-2.3-1.4-5.1.9-5.6 3.7s1.9 5.2 4.3 5.6" stroke="hsl(var(--background))" />
     </g>
   </svg>
 );
