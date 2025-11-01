@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { ArrowRight, BookOpen, CalendarPlus, Map, Megaphone, Recycle, ScanSearch } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarPlus, Map, Megaphone, Recycle, ScanSearch, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -41,6 +41,12 @@ const features = [
     description: "Report illegal dumping sites to help keep Goa clean.",
     icon: <Megaphone className="w-8 h-8 text-primary" />,
     href: "/report-dumping",
+  },
+  {
+    title: "Feedback & Reviews",
+    description: "Share your thoughts and help us improve the app.",
+    icon: <Star className="w-8 h-8 text-primary" />,
+    href: "/feedback",
   },
 ];
 
