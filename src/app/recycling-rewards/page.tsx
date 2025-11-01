@@ -1,9 +1,24 @@
 
+'use client';
+
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Star, Gift, Lightbulb, Ticket, Smartphone, UtensilsCrossed, IndianRupee, ShoppingBag, Plane, Trophy } from "lucide-react";
 import RecyclingForm from "./recycling-form";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog";
+import React from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const rewards = [
     {
@@ -45,6 +60,17 @@ const rewards = [
   ];
 
 export default function RecyclingRewardsPage() {
+    const { toast } = useToast();
+    const userPoints = 1250;
+
+    const handleRedeem = (rewardName: string, points: number) => {
+        toast({
+            title: "Reward Redeemed!",
+            description: `You've successfully claimed your ${rewardName} for ${points} points.`,
+        });
+        // In a real app, you would deduct the points from the user's account here.
+    }
+
   return (
     <div className="container mx-auto p-4 md:p-8 animate-in fade-in">
       <PageHeader
@@ -64,7 +90,7 @@ export default function RecyclingRewardsPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-5xl font-bold">1,250</p>
+              <p className="text-5xl font-bold">{userPoints.toLocaleString()}</p>
               <p className="text-muted-foreground mt-2">Keep up the great work! You're making a real difference in Goa.</p>
             </CardContent>
           </Card>
@@ -106,9 +132,28 @@ export default function RecyclingRewardsPage() {
                                     <p className="text-sm text-muted-foreground">{reward.partner}</p>
                                 </div>
                             </div>
-                            <Button variant="secondary" size="sm" disabled={1250 < reward.points}>
-                                {reward.points} pts
-                            </Button>
+
+                             <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <Button variant="secondary" size="sm" disabled={userPoints < reward.points}>
+                                        {reward.points} pts
+                                    </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                    <AlertDialogTitle>Redeem {reward.name}?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This will deduct {reward.points} points from your balance. Are you sure you want to proceed?
+                                    </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                    <AlertDialogCancel>Save for Later</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleRedeem(reward.name, reward.points)}>
+                                        Yes, Redeem Now
+                                    </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
                         </li>
                     ))}
                 </ul>
