@@ -4,10 +4,11 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Circle, Clock, Loader, MapPin, PackageCheck, Send, Truck } from 'lucide-react';
+import { CheckCircle, Clock, Loader, MapPin, PackageCheck, Send, Truck } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import Image from 'next/image';
 import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
 
 const statuses = [
   { name: 'Request Sent', icon: <Send className="w-5 h-5" /> },
@@ -39,10 +40,6 @@ export default function TrackingTimeline() {
     return () => clearInterval(interval);
   }, [currentStatusIndex]);
 
-  const handleReset = () => {
-    setCurrentStatusIndex(0);
-  };
-
   return (
     <Card>
       <CardHeader>
@@ -70,7 +67,11 @@ export default function TrackingTimeline() {
               </div>
               <h3 className="text-xl font-bold text-primary">Collection Complete!</h3>
               <p className="text-muted-foreground">Thank you for helping keep Goa clean.</p>
-              <Button onClick={handleReset} className="mt-6">Schedule Another Pickup</Button>
+              <Button asChild className="mt-6">
+                <Link href="/schedule-pickup">
+                    Schedule Another Pickup
+                </Link>
+              </Button>
           </div>
         ) : (
             <div className="relative w-full">
