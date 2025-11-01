@@ -1,3 +1,4 @@
+
 'use client';
 
 import { PageHeader } from "@/components/page-header";
@@ -16,6 +17,7 @@ import { CalendarIcon, Loader2 } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from 'next/navigation';
 
 const scheduleSchema = z.object({
   address: z.string().min(10, "Please enter a valid address"),
@@ -30,6 +32,7 @@ type ScheduleFormValues = z.infer<typeof scheduleSchema>;
 export default function SchedulePickupPage() {
   const [isLoading, setIsLoading] = React.useState(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<ScheduleFormValues>({
     resolver: zodResolver(scheduleSchema),
@@ -45,6 +48,7 @@ export default function SchedulePickupPage() {
         description: `Your waste pickup is confirmed for ${format(data.pickupDate, "PPP")} in the ${data.timeSlot} slot.`,
       });
       form.reset();
+      router.push('/tracking');
     }, 1500);
   };
 
