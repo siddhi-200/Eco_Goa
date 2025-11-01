@@ -20,7 +20,7 @@ const fontSans = FontSans({
 // we will handle metadata in a different way if needed, or acknowledge this change.
 // For now, let's keep it simple. We can define static metadata.
 // export const metadata: Metadata = {
-//   title: 'Nirmal Goekar',
+//   title: 'EcoGoa',
 //   description: 'Waste management and recycling for a greener Goa.',
 // };
 
@@ -42,7 +42,7 @@ export default function RootLayout({
   
   // Basic metadata that can be defined in a client component.
   useEffect(() => {
-    document.title = 'Nirmal Goekar';
+    document.title = 'EcoGoa';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Waste management and recycling for a greener Goa.');
