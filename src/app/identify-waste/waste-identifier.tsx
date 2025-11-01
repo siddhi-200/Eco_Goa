@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useRef } from 'react';
@@ -21,17 +22,18 @@ export default function WasteIdentifier() {
     const file = event.target.files?.[0];
     if (file) {
       setResult(null);
+      setIsLoading(true);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result as string);
-        handleSubmit(reader.result as string);
+        const dataUri = reader.result as string;
+        setPreview(dataUri);
+        handleSubmit(dataUri);
       };
       reader.readAsDataURL(file);
     }
   };
 
   const handleSubmit = async (dataUri: string) => {
-    setIsLoading(true);
     const response = await identifyWasteAction({ photoDataUri: dataUri });
     setIsLoading(false);
 
@@ -63,7 +65,7 @@ export default function WasteIdentifier() {
             className="relative w-full aspect-square border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center text-center text-muted-foreground p-4 cursor-pointer hover:bg-muted/50 transition-colors"
             onClick={handleUploadClick}
           >
-            {preview ? (
+            {preview && !isLoading ? (
               <Image src={preview} alt="Uploaded waste item" fill className="object-contain rounded-md" />
             ) : (
               <>
@@ -71,6 +73,12 @@ export default function WasteIdentifier() {
                 <h3 className="text-lg font-semibold">Click to upload image</h3>
                 <p>or drag and drop</p>
               </>
+            )}
+             {isLoading && (
+              <div className="absolute inset-0 bg-background/80 flex flex-col items-center justify-center">
+                <Loader2 className="w-12 h-12 animate-spin" />
+                <p className="mt-4">Analyzing...</p>
+              </div>
             )}
           </div>
           <input
