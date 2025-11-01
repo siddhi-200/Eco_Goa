@@ -6,14 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { Truck, User, Building } from "lucide-react";
 import Image from "next/image";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TrackingTimeline from "./tracking-timeline";
 
-const truckPositions = [
-  { id: 1, top: '20%', left: '30%', label: 'North Goa Truck 1' },
-  { id: 2, top: '50%', left: '60%', label: 'South Goa Truck 1' },
-  { id: 3, top: '75%', left: '40%', label: 'South Goa Truck 2' },
-  { id: 4, top: '35%', left: '75%', label: 'North Goa Truck 2' },
+const initialTruckPositions = [
+  { id: 1, top: 20, left: 30, label: 'North Goa Truck 1' },
+  { id: 2, top: 50, left: 60, label: 'South Goa Truck 1' },
+  { id: 3, top: 75, left: 40, label: 'South Goa Truck 2' },
+  { id: 4, top: 35, left: 75, label: 'North Goa Truck 2' },
 ];
 
 const userLocation = { top: '55%', left: '25%', label: 'Your Location' };
@@ -26,6 +26,23 @@ const councilOffices = [
 
 export default function TrackingPage() {
   const mapImage = PlaceHolderImages.find(p => p.id === "goa-map");
+  const [truckPositions, setTruckPositions] = useState(initialTruckPositions);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTruckPositions(prevPositions =>
+        prevPositions.map(truck => {
+          // Simulate random movement
+          const newTop = Math.min(90, Math.max(10, truck.top + (Math.random() - 0.5) * 5));
+          const newLeft = Math.min(90, Math.max(10, truck.left + (Math.random() - 0.5) * 5));
+          return { ...truck, top: newTop, left: newLeft };
+        })
+      );
+    }, 2000); // Update every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   return (
     <div className="container mx-auto p-4 md:p-8 animate-in fade-in">
@@ -58,8 +75,8 @@ export default function TrackingPage() {
               {truckPositions.map(truck => (
                 <div
                   key={`truck-${truck.id}`}
-                  className="absolute group flex flex-col items-center"
-                  style={{ top: truck.top, left: truck.left }}
+                  className="absolute group flex flex-col items-center transition-all duration-1000 ease-linear"
+                  style={{ top: `${truck.top}%`, left: `${truck.left}%` }}
                 >
                   <div className="p-2 bg-primary rounded-full shadow-lg">
                       <Truck className="w-5 h-5 text-primary-foreground animate-pulse" />
