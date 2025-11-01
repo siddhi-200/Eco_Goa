@@ -65,13 +65,19 @@ export default function WasteIdentifier() {
             className="relative w-full aspect-square border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center text-center text-muted-foreground p-4 cursor-pointer hover:bg-muted/50 transition-colors"
             onClick={handleUploadClick}
           >
-            {preview && !isLoading ? (
+            {preview && !isLoading && !result ? (
               <Image src={preview} alt="Uploaded waste item" fill className="object-contain rounded-md" />
             ) : (
               <>
-                <Upload className="w-12 h-12 mb-4" />
-                <h3 className="text-lg font-semibold">Click to upload image</h3>
-                <p>or drag and drop</p>
+                {preview && (result || isLoading) ? (
+                  <Image src={preview} alt="Uploaded waste item" fill className="object-contain rounded-md" />
+                ) : (
+                  <>
+                    <Upload className="w-12 h-12 mb-4" />
+                    <h3 className="text-lg font-semibold">Click to upload image</h3>
+                    <p>or drag and drop</p>
+                  </>
+                )}
               </>
             )}
              {isLoading && (
