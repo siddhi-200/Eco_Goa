@@ -15,11 +15,11 @@ export function SplashScreen({ onAnimationEnd }: SplashScreenProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsFadingOut(true);
-    }, 1500); // Show splash for 1.5 seconds
+    }, 59500); // Show splash for 59.5 seconds
 
     const fadeOutTimer = setTimeout(() => {
       onAnimationEnd();
-    }, 2000); // 1.5s display + 0.5s fade out
+    }, 60000); // 59.5s display + 0.5s fade out
 
     return () => {
       clearTimeout(timer);
