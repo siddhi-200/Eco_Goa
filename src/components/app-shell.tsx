@@ -18,6 +18,20 @@ import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
 import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
 import { Button } from './ui/button';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from './ui/label';
+
 
 const navItems = [
   { href: '/', label: 'Home', icon: <Home /> },
@@ -67,9 +81,45 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <SidebarTrigger className="md:hidden" />
               <Logo />
             </div>
-            <Button variant="ghost" size="icon" aria-label="Sign out">
-              <LogOut className="h-5 w-5" />
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" size="icon" aria-label="Sign out">
+                  <LogOut className="h-5 w-5" />
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you sure you want to sign out?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    We're sorry to see you go. Your session will be ended. Please select a reason for signing out.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <div className="py-4">
+                  <RadioGroup defaultValue="other">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <RadioGroupItem value="break" id="r1" />
+                      <Label htmlFor="r1">Taking a break</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 mb-2">
+                      <RadioGroupItem value="switch" id="r2" />
+                      <Label htmlFor="r2">Switching to another account</Label>
+                    </div>
+                    <div className="flex items-center space-x-2 mb-2">
+                      <RadioGroupItem value="exploring" id="r3" />
+                      <Label htmlFor="r3">Just exploring the app</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="other" id="r4" />
+                      <Label htmlFor="r4">Other</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction>Sign Out</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
         </header>
         <div className="flex-1 overflow-auto bg-background">
           {children}
