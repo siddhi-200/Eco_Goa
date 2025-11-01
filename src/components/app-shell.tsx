@@ -15,10 +15,11 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, Home, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
+import { BookOpen, CalendarPlus, Home, Info, Map, Megaphone, Recycle, ScanSearch } from 'lucide-react';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: <Home /> },
+  { href: '/about', label: 'About', icon: <Info /> },
   { href: '/schedule-pickup', label: 'Schedule Pickup', icon: <CalendarPlus /> },
   { href: '/tracking', label: 'Track Collection', icon: <Map /> },
   { href: '/recycling-rewards', label: 'Recycling Rewards', icon: <Recycle /> },

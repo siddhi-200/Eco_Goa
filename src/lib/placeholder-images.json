@@ -35,6 +35,12 @@
       "description": "A user submitting a photo of their recycling.",
       "imageUrl": "https://images.unsplash.com/photo-1686946112728-5c4ad72aad55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZWN5Y2xpbmclMjBpdGVtc3xlbnwwfHx8fDE3NjE4MjM0NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "recycling items"
+    },
+    {
+      "id": "about-us",
+      "description": "A lush green landscape in Goa, representing its natural beauty.",
+      "imageUrl": "https://images.unsplash.com/photo-1609146143099-0a6b8c74f7b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxnb2ElMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzYxOTYzMjQzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "goa landscape"
     }
   ]
 }

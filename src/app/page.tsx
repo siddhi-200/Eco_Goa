@@ -70,7 +70,7 @@ export default function Home() {
               Your one-stop solution for smart waste management, recycling rewards, and community action in Goa.
             </p>
             <Button asChild size="lg" className="mt-8 bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link href="/schedule-pickup">
+              <Link href="/about">
                 Get Started <ArrowRight className="ml-2" />
               </Link>
             </Button>
