@@ -1,9 +1,10 @@
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { BookOpen, CalendarPlus, Info, Map, Megaphone, Recycle, ScanSearch, Scale } from "lucide-react";
+import { BookOpen, CalendarPlus, Info, Map, Megaphone, Recycle, ScanSearch, Scale, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const features = [
     {
@@ -131,6 +132,15 @@ export default function AboutPage() {
                     </Card>
                 ))}
             </div>
+        </div>
+
+        <div className="text-center mt-12">
+            <Button asChild size="lg">
+                <Link href="/">
+                    <ArrowLeft className="mr-2 h-5 w-5" />
+                    Back to Home
+                </Link>
+            </Button>
         </div>
 
       </div>
