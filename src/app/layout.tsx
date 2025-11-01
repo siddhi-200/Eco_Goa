@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { Inter as FontSans } from 'next/font/google';
 import { useState, useEffect } from 'react';
 import { SplashScreen } from '@/components/splash-screen';
+import { FirebaseClientProvider } from '@/firebase/client-provider';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -63,12 +64,12 @@ export default function RootLayout({
         {isLoading && isInitialLoad ? (
           <SplashScreen onAnimationEnd={() => setIsLoading(false)} />
         ) : (
-          <>
+          <FirebaseClientProvider>
             <AppShell>
               {children}
             </AppShell>
             <Toaster />
-          </>
+          </FirebaseClientProvider>
         )}
       </body>
     </html>

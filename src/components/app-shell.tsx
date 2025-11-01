@@ -16,7 +16,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch, Star, Phone } from 'lucide-react';
+import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch, Star, Phone, LogIn } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   AlertDialog,
@@ -31,6 +31,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from './ui/label';
+import { useAuth, useUser } from '@/firebase';
+import { Avatar, AvatarFallback } from './ui/avatar';
 
 
 const navItems = [
@@ -46,8 +48,20 @@ const navItems = [
   { href: '/contacts', label: 'Contacts', icon: <Phone /> },
 ];
 
+const authNavItems = [
+    { href: '/login', label: 'Login', icon: <LogIn /> },
+];
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const auth = useAuth();
+  const { data: user } = useUser();
+
+  const handleSignOut = () => {
+    if (auth) {
+      auth.signOut();
+    }
+  };
 
   return (
     <SidebarProvider>
@@ -71,10 +85,34 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
+             {!user && authNavItems.map((item) => (
+                <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                    asChild
+                    isActive={pathname === item.href}
+                    tooltip={item.label}
+                    >
+                    <Link href={item.href}>
+                        {item.icon}
+                        <span>{item.label}</span>
+                    </Link>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+            ))}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-           {/* User Profile can be added here later */}
+           {user && (
+            <div className="flex items-center gap-3 p-2">
+                <Avatar>
+                    <AvatarFallback>{user.email?.[0].toUpperCase()}</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col overflow-hidden">
+                    <span className="text-sm font-semibold truncate">{user.displayName || user.email}</span>
+                    <span className="text-xs text-muted-foreground truncate">Welcome!</span>
+                </div>
+            </div>
+           )}
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
@@ -83,45 +121,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <SidebarTrigger className="md:hidden" />
               <Logo />
             </div>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Sign out">
-                  <LogOut className="h-5 w-5" />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you sure you want to sign out?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    We're sorry to see you go. Your session will be ended. Please select a reason for signing out.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <div className="py-4">
-                  <RadioGroup defaultValue="other">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <RadioGroupItem value="break" id="r1" />
-                      <Label htmlFor="r1">Taking a break</Label>
-                    </div>
-                    <div className="flex items-center space-x-2 mb-2">
-                      <RadioGroupItem value="switch" id="r2" />
-                      <Label htmlFor="r2">Switching to another account</Label>
-                    </div>
-                    <div className="flex items-center space-x-2 mb-2">
-                      <RadioGroupItem value="exploring" id="r3" />
-                      <Label htmlFor="r3">Just exploring the app</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="other" id="r4" />
-                      <Label htmlFor="r4">Other</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Sign Out</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            {user && (
+                <AlertDialog>
+                <AlertDialogTrigger asChild>
+                    <Button variant="ghost" size="icon" aria-label="Sign out">
+                    <LogOut className="h-5 w-5" />
+                    </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                    <AlertDialogTitle>Are you sure you want to sign out?</AlertDialogTitle>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleSignOut}>Sign Out</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+                </AlertDialog>
+            )}
         </header>
         <div className="flex-1 overflow-auto bg-background">
           {children}
