@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
-import { ArrowRight, BookOpen, CalendarPlus, Map, Megaphone, Recycle, ScanSearch, Star, Smartphone, Server, Truck, Leaf } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarPlus, Map, Megaphone, Recycle, ScanSearch, Star, Smartphone, Server, Truck, Leaf, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -48,30 +48,14 @@ const features = [
     icon: <Star className="w-8 h-8 text-primary" />,
     href: "/feedback",
   },
+  {
+    title: "Contacts",
+    description: "Find important contacts and see how the app works.",
+    icon: <Phone className="w-8 h-8 text-primary" />,
+    href: "/contacts",
+  },
 ];
 
-const howItWorksSteps = [
-  {
-    title: "1. You Act",
-    description: "Use the app to schedule a pickup, report illegal dumping, or identify waste with a photo.",
-    icon: <Smartphone className="w-10 h-10 text-primary" />,
-  },
-  {
-    title: "2. We Connect",
-    description: "Our system instantly processes your request and alerts the nearest municipal council or collection partner.",
-    icon: <Server className="w-10 h-10 text-primary" />,
-  },
-  {
-    title: "3. Action on the Ground",
-    description: "A collection truck is dispatched for your pickup, or an official investigates your report.",
-    icon: <Truck className="w-10 h-10 text-primary" />,
-  },
-  {
-    title: "4. A Greener Goa",
-    description: "Your action directly contributes to a cleaner, healthier environment for everyone in Goa.",
-    icon: <Leaf className="w-10 h-10 text-primary" />,
-  },
-];
 
 
 export default function Home() {
@@ -113,7 +97,7 @@ export default function Home() {
               <h2 className="text-3xl font-bold font-headline tracking-tight">Our Core Features</h2>
               <p className="mt-2 text-lg text-muted-foreground">Everything you need for responsible waste management.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
                 <Card key={index} className="flex flex-col hover:shadow-lg transition-shadow duration-300 animate-in fade-in slide-in-from-bottom-4" style={{ animationDelay: `${index * 100}ms` }}>
                   <CardHeader className="flex flex-row items-start gap-4">
@@ -136,26 +120,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
-
-        <section className="bg-muted/50 py-12 md:py-20 px-4">
-            <div className="container mx-auto">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold font-headline tracking-tight">How It Works</h2>
-                    <p className="mt-2 text-lg text-muted-foreground">From your phone to a cleaner Goa in 4 simple steps.</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {howItWorksSteps.map((step, index) => (
-                        <div key={index} className="flex flex-col items-center text-center p-4">
-                            <div className="mb-4 bg-background p-4 rounded-full shadow-md">
-                                {step.icon}
-                            </div>
-                            <h3 className="text-xl font-bold font-headline mb-2">{step.title}</h3>
-                            <p className="text-muted-foreground">{step.description}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
         </section>
       </main>
     </div>

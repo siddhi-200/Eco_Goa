@@ -16,7 +16,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch, Star } from 'lucide-react';
+import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch, Star, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import {
   AlertDialog,
@@ -43,6 +43,7 @@ const navItems = [
   { href: '/resources', label: 'Resources', icon: <BookOpen /> },
   { href: '/report-dumping', label: 'Report Dumping', icon: <Megaphone /> },
   { href: '/feedback', label: 'Feedback', icon: <Star /> },
+  { href: '/contacts', label: 'Contacts', icon: <Phone /> },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
