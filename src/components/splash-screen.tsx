@@ -1,7 +1,7 @@
 
 'use client';
 
-import { Logo } from './logo';
+import { SplashScreenLogo } from './logo';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
@@ -35,7 +35,7 @@ export function SplashScreen({ onAnimationEnd }: SplashScreenProps) {
       )}
     >
       <div className="animate-pulse">
-        <Logo />
+        <SplashScreenLogo />
       </div>
     </div>
   );
