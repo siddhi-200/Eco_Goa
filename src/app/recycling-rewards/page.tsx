@@ -2,7 +2,7 @@
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Star, Gift, Lightbulb, Ticket, Smartphone, UtensilsCrossed } from "lucide-react";
+import { Star, Gift, Lightbulb, Ticket, Smartphone, UtensilsCrossed, IndianRupee, ShoppingBag, Plane, Trophy } from "lucide-react";
 import RecyclingForm from "./recycling-form";
 
 const rewards = [
@@ -11,6 +11,12 @@ const rewards = [
       points: 750,
       partner: "INOX Cinemas",
       icon: <Ticket className="w-6 h-6 text-rose-500" />,
+    },
+    {
+      name: "₹100 Cashback",
+      points: 1000,
+      partner: "via UPI",
+      icon: <IndianRupee className="w-6 h-6 text-green-600" />,
     },
     {
       name: "5GB Mobile Data Pack",
@@ -23,6 +29,12 @@ const rewards = [
       points: 1500,
       partner: "Swiggy/Zomato",
       icon: <UtensilsCrossed className="w-6 h-6 text-orange-500" />,
+    },
+    {
+      name: "₹250 Shopping Coupon",
+      points: 2000,
+      partner: "Myntra/Ajio",
+      icon: <ShoppingBag className="w-6 h-6 text-purple-500" />,
     },
   ];
   
@@ -54,6 +66,24 @@ export default function RecyclingRewardsPage() {
             <CardContent>
               <p className="text-5xl font-bold">1,250</p>
               <p className="text-muted-foreground mt-2">Keep up the great work! You're making a real difference in Goa.</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-br from-primary/80 to-primary text-primary-foreground">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                    <Trophy className="w-8 h-8"/>
+                    <span>Grand Prize</span>
+                </CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="flex items-center gap-4">
+                    <Plane className="w-12 h-12" />
+                    <div>
+                        <h3 className="text-xl font-bold">Win a Trip!</h3>
+                        <p className="text-sm opacity-90">The user with the most points at the end of the month wins an all-inclusive trip for two!</p>
+                    </div>
+                </div>
             </CardContent>
           </Card>
 
