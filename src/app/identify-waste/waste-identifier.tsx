@@ -10,6 +10,7 @@ import { Loader2, ScanSearch, Upload, FileCheck2, AlertCircle } from 'lucide-rea
 import { identifyWasteAction } from '@/lib/actions';
 import { IdentifyWasteTypeOutput } from '@/ai/flows/identify-waste-type-from-photo';
 import { useToast } from '@/hooks/use-toast';
+import { Input } from '@/components/ui/input';
 
 export default function WasteIdentifier() {
   const [preview, setPreview] = useState<string | null>(null);
@@ -22,19 +23,27 @@ export default function WasteIdentifier() {
     const file = event.target.files?.[0];
     if (file) {
       setResult(null);
-      setIsLoading(true);
       const reader = new FileReader();
       reader.onloadend = () => {
         const dataUri = reader.result as string;
         setPreview(dataUri);
-        handleSubmit(dataUri);
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = async (dataUri: string) => {
-    const response = await identifyWasteAction({ photoDataUri: dataUri });
+  const handleSubmit = async () => {
+    if (!preview) {
+        toast({
+            variant: "destructive",
+            title: "No image selected",
+            description: "Please choose an image to analyze."
+        });
+        return;
+    }
+    
+    setIsLoading(true);
+    const response = await identifyWasteAction({ photoDataUri: preview });
     setIsLoading(false);
 
     if ('error' in response) {
@@ -65,19 +74,13 @@ export default function WasteIdentifier() {
             className="relative w-full aspect-square border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center text-center text-muted-foreground p-4 cursor-pointer hover:bg-muted/50 transition-colors"
             onClick={handleUploadClick}
           >
-            {preview && !isLoading && !result ? (
+            {preview ? (
               <Image src={preview} alt="Uploaded waste item" fill className="object-contain rounded-md" />
             ) : (
               <>
-                {preview && (result || isLoading) ? (
-                  <Image src={preview} alt="Uploaded waste item" fill className="object-contain rounded-md" />
-                ) : (
-                  <>
-                    <Upload className="w-12 h-12 mb-4" />
-                    <h3 className="text-lg font-semibold">Click to upload image</h3>
-                    <p>or drag and drop</p>
-                  </>
-                )}
+                <Upload className="w-12 h-12 mb-4" />
+                <h3 className="text-lg font-semibold">Click to upload image</h3>
+                <p>or drag and drop</p>
               </>
             )}
              {isLoading && (
@@ -87,7 +90,7 @@ export default function WasteIdentifier() {
               </div>
             )}
           </div>
-          <input
+          <Input
             type="file"
             ref={fileInputRef}
             onChange={handleFileChange}
@@ -95,9 +98,9 @@ export default function WasteIdentifier() {
             accept="image/*"
             disabled={isLoading}
           />
-           <Button onClick={handleUploadClick} disabled={isLoading} className="w-full mt-4">
-              <Upload className="mr-2 h-4 w-4" />
-              Choose a file
+           <Button onClick={handleSubmit} disabled={isLoading || !preview} className="w-full mt-4">
+              <ScanSearch className="mr-2 h-4 w-4" />
+              {isLoading ? 'Analyzing...' : 'Analyze Image'}
             </Button>
         </CardContent>
       </Card>
