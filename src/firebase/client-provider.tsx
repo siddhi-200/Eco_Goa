@@ -34,7 +34,6 @@ function createDemoAuth(): Auth {
     currentUser,
     onAuthStateChanged: (listener: (user: User | null) => void) => {
       listeners.push(listener);
-      // Immediately invoke with current state
       Promise.resolve().then(() => listener(currentUser));
       return () => {
         const index = listeners.indexOf(listener);
@@ -81,7 +80,26 @@ function createDemoAuth(): Auth {
         broadcastUser();
       }
       return Promise.resolve();
-    }
+    },
+    // Add missing properties
+    app: {} as FirebaseApp,
+    name: 'demo-auth',
+    config: {},
+    languageCode: 'en',
+    tenantId: null,
+    updateCurrentUser: async () => {},
+    useDeviceLanguage: () => {},
+    settings: {
+        appVerificationDisabledForTesting: true,
+        authDomain: 'localhost'
+    },
+    _canInitEmulator: true,
+    _isInitialized: true,
+    _initializationPromise: Promise.resolve(),
+    _updateCurrentUser: async () => {},
+    _getProjectConfig: () => ({
+        authDomain: 'localhost'
+    }),
   } as unknown as Auth;
 }
 
