@@ -2,7 +2,6 @@
 'use client';
 
 import './globals.css';
-import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster";
 import { AppShell } from '@/components/app-shell';
 import { cn } from '@/lib/utils';

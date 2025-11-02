@@ -19,6 +19,7 @@ import { useAuth } from '@/firebase';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
@@ -42,7 +43,7 @@ export function SignupForm() {
     setIsLoading(true);
     try {
       if (auth) {
-        await auth.createUserWithEmailAndPassword(values.email, values.password);
+        await createUserWithEmailAndPassword(auth, values.email, values.password);
         toast({
           title: 'Account Created',
           description: "You've been successfully signed up!",

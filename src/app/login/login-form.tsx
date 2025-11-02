@@ -19,6 +19,7 @@ import { useAuth } from '@/firebase';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
@@ -42,7 +43,7 @@ export function LoginForm() {
     setIsLoading(true);
     try {
       if (auth) {
-        await auth.signInWithEmailAndPassword(values.email, values.password);
+        await signInWithEmailAndPassword(auth, values.email, values.password);
         toast({
           title: 'Login Successful',
           description: 'Welcome back!',

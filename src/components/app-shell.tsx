@@ -29,8 +29,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from './ui/label';
 import { useAuth, useUser } from '@/firebase';
 import { Avatar, AvatarFallback } from './ui/avatar';
 

@@ -19,6 +19,7 @@ import { useAuth } from '@/firebase';
 import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { sendPasswordResetEmail } from 'firebase/auth';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
@@ -41,7 +42,7 @@ export function ForgotPasswordForm() {
     setIsLoading(true);
     try {
       if (auth) {
-        await auth.sendPasswordResetEmail(values.email);
+        await sendPasswordResetEmail(auth, values.email);
         setIsSubmitted(true);
       }
     } catch (error: any) {
