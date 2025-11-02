@@ -16,22 +16,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './logo';
-import { BookOpen, CalendarPlus, Home, Info, LogOut, Map, Megaphone, Recycle, ScanSearch, Star, Phone, LogIn } from 'lucide-react';
-import { Button } from './ui/button';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { useAuth, useUser } from '@/firebase';
-import { Avatar, AvatarFallback } from './ui/avatar';
-
+import { BookOpen, CalendarPlus, Home, Info, Map, Megaphone, Recycle, ScanSearch, Star, Phone } from 'lucide-react';
 
 const navItems = [
   { href: '/', label: 'Home', icon: <Home /> },
@@ -46,20 +31,8 @@ const navItems = [
   { href: '/contacts', label: 'Contacts', icon: <Phone /> },
 ];
 
-const authNavItems = [
-    { href: '/login', label: 'Login', icon: <LogIn /> },
-];
-
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const auth = useAuth();
-  const { data: user } = useUser();
-
-  const handleSignOut = () => {
-    if (auth) {
-      auth.signOut();
-    }
-  };
 
   return (
     <SidebarProvider>
@@ -83,34 +56,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
-             {!user && authNavItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    tooltip={item.label}
-                    >
-                    <Link href={item.href}>
-                        {item.icon}
-                        <span>{item.label}</span>
-                    </Link>
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
-            ))}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-           {user && (
-            <div className="flex items-center gap-3 p-2">
-                <Avatar>
-                    <AvatarFallback>{user.email?.[0].toUpperCase()}</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col overflow-hidden">
-                    <span className="text-sm font-semibold truncate">{user.displayName || user.email}</span>
-                    <span className="text-xs text-muted-foreground truncate">Welcome!</span>
-                </div>
-            </div>
-           )}
+           {/* Footer content can go here */}
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
@@ -119,24 +68,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <SidebarTrigger className="md:hidden" />
               <Logo />
             </div>
-            {user && (
-                <AlertDialog>
-                <AlertDialogTrigger asChild>
-                    <Button variant="ghost" size="icon" aria-label="Sign out">
-                    <LogOut className="h-5 w-5" />
-                    </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure you want to sign out?</AlertDialogTitle>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleSignOut}>Sign Out</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-                </AlertDialog>
-            )}
         </header>
         <div className="flex-1 overflow-auto bg-background">
           {children}
