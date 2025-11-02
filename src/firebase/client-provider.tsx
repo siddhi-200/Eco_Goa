@@ -30,7 +30,7 @@ function createDemoAuth(): Auth {
     listeners.forEach((listener) => listener(currentUser));
   }
 
-  return {
+  const auth = {
     currentUser,
     onAuthStateChanged: (listener: (user: User | null) => void) => {
       listeners.push(listener);
@@ -42,7 +42,7 @@ function createDemoAuth(): Auth {
         }
       };
     },
-    signInWithEmailAndPassword: async (email, password) => {
+    signInWithEmailAndPassword: async (email: string, password?: string) => {
       console.log('Demo sign in with:', email, password);
       currentUser = {
         uid: 'demo-user-123',
@@ -53,7 +53,7 @@ function createDemoAuth(): Auth {
       broadcastUser();
       return { user: currentUser };
     },
-    createUserWithEmailAndPassword: async (email, password) => {
+    createUserWithEmailAndPassword: async (email: string, password?: string) => {
       console.log('Demo create user with:', email, password);
       currentUser = {
         uid: 'demo-user-123',
@@ -69,11 +69,11 @@ function createDemoAuth(): Auth {
       currentUser = null;
        broadcastUser();
     },
-    sendPasswordResetEmail: async (email) => {
+    sendPasswordResetEmail: async (email: string) => {
        console.log('Demo password reset for:', email);
        return Promise.resolve();
     },
-    updateProfile: async (user, profile) => {
+    updateProfile: async (user: User, profile: any) => {
       if(user) {
         user.displayName = profile.displayName ?? user.displayName;
         currentUser = user;
@@ -81,26 +81,21 @@ function createDemoAuth(): Auth {
       }
       return Promise.resolve();
     },
-    // Add missing properties
+    // Mock other Auth properties and methods as needed
     app: {} as FirebaseApp,
     name: 'demo-auth',
     config: {},
     languageCode: 'en',
     tenantId: null,
-    updateCurrentUser: async () => {},
-    useDeviceLanguage: () => {},
     settings: {
         appVerificationDisabledForTesting: true,
         authDomain: 'localhost'
     },
-    _canInitEmulator: true,
-    _isInitialized: true,
-    _initializationPromise: Promise.resolve(),
-    _updateCurrentUser: async () => {},
-    _getProjectConfig: () => ({
-        authDomain: 'localhost'
-    }),
-  } as unknown as Auth;
+  };
+  
+  // This is a bit of a hack to satisfy the full Auth interface
+  // without having to mock everything.
+  return auth as unknown as Auth;
 }
 
 
